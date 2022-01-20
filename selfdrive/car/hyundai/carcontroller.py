@@ -48,7 +48,6 @@ class CarController():
     self.car_fingerprint = CP.carFingerprint
     self.packer = CANPacker(dbc_name)
     self.apply_steer_last = 0
-    self.steer_rate_limited = False
     self.lkas11_cnt = 0
     self.scc12_cnt = -1
     self.resume_cnt = 0
@@ -63,7 +62,6 @@ class CarController():
     self.lfamfc = params.get("MfcSelect", encoding='utf8') == "2"
     self.mad_mode_enabled = params.get("LongControlSelect", encoding='utf8') == "0" or \
                             params.get("LongControlSelect", encoding='utf8') == "1"
-    self.stock_navi_decel_enabled = params.get_bool('StockNaviDecelEnabled')
 
     # gas_factor, brake_factor
     # Adjust it in the range of 0.7 to 1.3
@@ -77,8 +75,6 @@ class CarController():
     new_steer = int(round(actuators.steer * CarControllerParams.STEER_MAX))
     apply_steer = apply_std_steer_torque_limits(new_steer, self.apply_steer_last, CS.out.steeringTorque,
                                                 CarControllerParams)
-
-    self.steer_rate_limited = new_steer != apply_steer
 
     # disable if steer angle reach 90 deg, otherwise mdps fault in some models
     #lkas_active = enabled and not CS.out.steerWarning and abs(CS.out.steeringAngleDeg) < CS.CP.maxSteeringAngleDeg
@@ -197,14 +193,9 @@ class CarController():
         if aReqValue > controls.aReqValueMax:
           controls.aReqValueMax = controls.aReqValue
 
-        if self.stock_navi_decel_enabled:
-          controls.sccStockCamAct = CS.scc11["Navi_SCC_Camera_Act"]
-          controls.sccStockCamStatus = CS.scc11["Navi_SCC_Camera_Status"]
-          apply_accel, stock_cam = self.scc_smoother.get_stock_cam_accel(apply_accel, aReqValue, CS.scc11)
-        else:
-          controls.sccStockCamAct = 0
-          controls.sccStockCamStatus = 0
-          stock_cam = False
+        controls.sccStockCamAct = 0
+        controls.sccStockCamStatus = 0
+        stock_cam = False
 
         if self.scc12_cnt < 0:
           self.scc12_cnt = CS.scc12["CR_VSM_Alive"] if not CS.no_radar else 0

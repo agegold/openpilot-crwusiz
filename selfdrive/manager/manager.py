@@ -5,7 +5,6 @@ import signal
 import subprocess
 import sys
 import traceback
-from multiprocessing import Process
 
 import cereal.messaging as messaging
 import selfdrive.crash as crash
@@ -21,7 +20,6 @@ from selfdrive.athena.registration import register, UNREGISTERED_DONGLE_ID
 from selfdrive.swaglog import cloudlog, add_file_handler
 from selfdrive.version import get_dirty, get_commit, get_version, get_origin, get_short_branch, \
                               terms_version, training_version, get_comma_remote
-from selfdrive.hardware.eon.apk import system
 
 sys.path.append(os.path.join(BASEDIR, "pyextra"))
 
@@ -51,10 +49,7 @@ def manager_init():
     ("MfcSelect", "0"),
     ("LateralControlSelect", "0"),
     ("ShutdowndDisable", "1"),
-    ("LoggerDisable", "0"),
-    ("SccSmootherSlowOnCurves", "1"),
-    ("SccSmootherSyncGasPressed", "1"),
-    ("StockNaviDecelEnabled", "0"),
+    ("LoggerDisable", "1"),
     ("NewRadarInterface", "0"),
   ]
   if not PC:
@@ -134,13 +129,6 @@ def manager_cleanup():
 
 
 def manager_thread():
-
-  if EON:
-    Process(name="shutdownd", target=launcher, args=("selfdrive.shutdownd",)).start()
-    system("am startservice com.neokii.optool/.MainService")
-
-  Process(name="road_speed_limiter", target=launcher, args=("selfdrive.road_speed_limiter",)).start()
-
   cloudlog.info("manager start")
   cloudlog.info({"environ": os.environ})
 
@@ -169,12 +157,14 @@ def manager_thread():
 
     if params.get_bool("ShutdowndDisable"):
       not_run.append("shutdownd")
+
     if params.get_bool("LoggerDisable"):
       not_run.append("loggerd")
       not_run.append("deleter")
       not_run.append("logmessaged")
       not_run.append("tombstoned")
       not_run.append("uploader")
+
     started = sm['deviceState'].started
     driverview = params.get_bool("IsDriverViewEnabled")
     ensure_running(managed_processes.values(), started, driverview, not_run)
