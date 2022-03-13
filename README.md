@@ -37,12 +37,10 @@ crwusiz openpilot
 
 cable order -> https://smartstore.naver.com/hyotrade/products/5341431170
 
-[![](https://i.imgur.com/aspMjGT.jpg)](#)
-[![](https://i.imgur.com/1DB7gyL.jpg)](#)
-[![](https://i.imgur.com/2r43I6d.jpg)](#)
-[![](https://i.imgur.com/N5IkjUX.jpg)](#)
-[![](https://i.imgur.com/HaXcjPI.jpg)](#)
- 
+[![](https://i.imgur.com/sRcmaeS.png)](#)
+[![](https://i.imgur.com/arZrs6d.png)](#)
+[![](https://i.imgur.com/uqJlVrC.jpg)](#)
+
 ## chevrolet bolt branch
 - https://github.com/JasonJShuler/openpilot
 - https://github.com/hanabi95/openpilot
