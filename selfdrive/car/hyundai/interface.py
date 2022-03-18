@@ -74,7 +74,7 @@ class CarInterface(CarInterfaceBase):
         ret.mass = 1640. + STD_CARGO_KG
         ret.wheelbase = 2.805
         ret.steerRatio = 15.2
-    elif candidate in [CAR.KONA, CAR.KONA_EV, CAR.KONA_HEV]:
+    elif candidate in [CAR.KONA, CAR.KONA_EV, CAR.KONA_HEV, CAR.KONA_N]:
         ret.mass = 1743. + STD_CARGO_KG
         ret.wheelbase = 2.600
         ret.steerRatio = 13.7
