@@ -28,6 +28,7 @@ class CAR:
   SONATA_LF = "HYUNDAI SONATA 2016~2019 (LF)"
   SONATA_LF_HEV = "HYUNDAI SONATA 2018 HEV (LF)"
   KONA = "HYUNDAI KONA 2019 (OS)"
+  KONA_N = "HYUNDAI KONA_N 2022 (OSN)"
   KONA_EV = "HYUNDAI KONA EV 2019 (OS)"
   KONA_HEV = "HYUNDAI KONA HEV 2019 (OS)"
   IONIQ_EV = "HYUNDAI IONIQ EV 2019~2020 (AE)"
@@ -103,6 +104,8 @@ FINGERPRINTS = {
   CAR.KONA: [{
     67: 8, 127: 8, 304: 8, 320: 8, 339: 8, 354: 3, 356: 4, 544: 8, 593: 8, 608: 8, 688: 5, 809: 8, 832: 8, 854: 7, 870: 7, 871: 8, 872: 8, 897: 8, 902: 8, 903: 8, 905: 8, 909: 8, 916: 8, 1040: 8, 1056: 8, 1057: 8, 1064: 8, 1078: 4, 1107: 5, 1136: 8, 1151: 6, 1156: 8, 1170: 8, 1173: 8, 1186: 2, 1191: 2, 1193: 8, 1265: 4,1280: 1, 1287: 4, 1290: 8, 1292: 8, 1294: 8, 1312: 8, 1322: 8, 1342: 6, 1345: 8, 1348: 8, 1363: 8, 1369: 8, 1378: 8, 1384: 8, 1394: 8, 1407: 8, 1414: 3, 1419: 8, 1427: 6, 1456: 4, 1470: 8, 1988: 8, 1990: 8, 1996: 8, 1998: 8, 2000: 8, 2001: 8, 2004: 8, 2008: 8, 2009: 8, 2012: 8, 2015: 8
   }],
+  CAR.KONA_N: [{   
+  }],  
   CAR.KONA_EV: [{
     127: 8, 304: 8, 320: 8, 339: 8, 352: 8, 356: 4, 544: 8, 549: 8, 593: 8, 688: 5, 832: 8, 881: 8, 882: 8, 897: 8, 902: 8, 903: 8, 905: 8, 909: 8, 916: 8, 1040: 8, 1042: 8, 1056: 8, 1057: 8, 1078: 4, 1136: 8, 1151: 6, 1157: 4, 1168: 7, 1173: 8, 1183: 8, 1186: 2, 1191: 2, 1193: 8, 1225: 8, 1260: 8, 1265: 4, 1280: 1, 1287: 4, 1290: 8, 1291: 8, 1292: 8, 1294: 8, 1307: 8, 1312: 8, 1322: 8, 1342: 6, 1345: 8, 1348: 8, 1355: 8, 1363: 8, 1369: 8, 1378: 4, 1379: 8, 1407: 8, 1419: 8, 1426: 8, 1427: 6, 1429: 8, 1430: 8, 1456: 4, 1470: 8, 1473: 8, 1507: 8, 1535: 8, 1988: 8, 1996: 8, 2000: 8, 2004: 8, 2008: 8, 2012: 8, 2015: 8
   }],
@@ -875,7 +878,7 @@ CHECKSUM = {
 
 FEATURES = {
   "use_cluster_gears": # Use Cluster for Gear Selection, rather than Transmission [ CLU15 ]
-    set([CAR.ELANTRA_I30, CAR.KONA, CAR.GRANDEUR, CAR.MOHAVE, CAR.NIRO_HEV, CAR.K7]),
+    set([CAR.ELANTRA_I30, CAR.KONA, CAR.GRANDEUR, CAR.MOHAVE, CAR.NIRO_HEV, CAR.K7, CAR.KONA]),
   "use_tcu_gears": # Use TCU Message for Gear Selection [ TCU12 ]
     set([CAR.SONATA_LF, CAR.VELOSTER, CAR.K5]),
   "use_elect_gears": # Use Elect GEAR Message for Gear Selection [ ELECT_GEAR ]
@@ -892,7 +895,7 @@ FEATURES = {
          CAR.K5_HEV, CAR.K5_DL3_HEV, CAR.K7_HEV]),
   "use_fca": # these cars use the [ FCA11 ] message for the AEB and FCW signals, all others use [ SCC12 ]
     set([CAR.SONATA, CAR.PALISADE, CAR.ELANTRA_I30, CAR.ELANTRA21, CAR.ELANTRA21_HEV, CAR.KONA, CAR.KONA_HEV, CAR.IONIQ_HEV,
-         CAR.GENESIS_G70, CAR.FORTE, CAR.STINGER, CAR.K9]),
+         CAR.GENESIS_G70, CAR.FORTE, CAR.STINGER, CAR.K9, CAR.KONA_N]),
   "not_lkas": # not lkas error car set
     set([CAR.SONATA, CAR.SONATA_HEV, CAR.PALISADE, CAR.SANTA_FE, CAR.KONA, CAR.KONA_EV, CAR.NIRO_EV]),
   "tcs13_remove": set([CAR.SANTA_FE]),
@@ -911,6 +914,7 @@ DBC = {
   CAR.SONATA_LF: dbc_dict('hyundai_kia_generic', None),
   CAR.SONATA_LF_HEV: dbc_dict('hyundai_kia_generic', None),
   CAR.KONA: dbc_dict('hyundai_kia_generic', None),
+  CAR.KONA_N: dbc_dict('hyundai_kia_generic', None),
   CAR.KONA_EV: dbc_dict('hyundai_kia_generic', None),
   CAR.KONA_HEV: dbc_dict('hyundai_kia_generic', None),
   CAR.IONIQ_EV: dbc_dict('hyundai_kia_generic', None),
