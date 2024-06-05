@@ -411,6 +411,21 @@ class CAR(Platforms):
     ],
     CarSpecs(mass=2205, wheelbase=3.273, steerRatio=11.94),
   )
+  HYUNDAI_SANTA_FE_2024_MX5 = HyundaiCanFDPlatformConfig(
+    [
+      HyundaiCarDocs("Hyundai Santa Fe (with HDA II) 2024", "Highway Driving Assist II", car_parts=CarParts.common([CarHarness.hyundai_q])),
+    ],
+    CarSpecs(mass=1915, wheelbase=2.815, steerRatio=14.26, tireStiffnessFactor=0.65),
+    flags=HyundaiFlags.ANGLE_CONTROL,
+  )
+  HYUNDAI_SANTA_FE_2024_HEV_MX5 = HyundaiCanFDPlatformConfig(
+    [
+      HyundaiCarDocs("Hyundai Santa Fe Hybrid (with HDA II) 2024", "Highway Driving Assist II", car_parts=CarParts.common([CarHarness.hyundai_q])),
+    ],
+    CarSpecs(mass=1930, wheelbase=2.815, steerRatio=14.26, tireStiffnessFactor=0.65),
+    flags=HyundaiFlags.HYBRID | HyundaiFlags.ANGLE_CONTROL,
+  )
+
 
   # Kia
   KIA_K3 = HyundaiPlatformConfig(
